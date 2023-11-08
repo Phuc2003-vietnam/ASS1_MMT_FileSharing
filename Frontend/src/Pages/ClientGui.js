@@ -56,7 +56,7 @@ const ClientGui = () => {
 
       const intervalId = setInterval(() => {
         fetchListFileOnServer();
-      }, 100000);
+      }, 10000);
 
       fetchListFileOnServer();
       fetchListFileOnRepository();
