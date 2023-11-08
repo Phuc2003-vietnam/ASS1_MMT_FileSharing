@@ -26,6 +26,7 @@ const ModalConfirmDelete = ({
         hostname: hostName,
         file: newListFile.data.files,
       };
+      console.log("send data Notice to Server", fileInfo);
       await ServerServiceApi.uploadFileInfo(fileInfo);
     } catch (error) {
       console.error("Error fetching data from API:", error);
