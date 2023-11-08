@@ -44,7 +44,9 @@ const ModalConfirmUpload = ({
     console.log("send data Notice to Server", fileInfo);
     // call api thong bao den server
 
-    await ServerServiceApi.uploadFileInfo(fileInfo);
+    const responseNotice = await ServerServiceApi.uploadFileInfo(fileInfo);
+
+    console.log("Update to Server", responseNotice);
 
     setOpenModal(false);
     // reload lại danh sach trong repository
