@@ -20,6 +20,7 @@ node.listen(3000, 3001, () => {
   console.log("File server is running on port 3000 and file server is 3001");
 });
 app.post("/fetch", (req, res) => {
+  console.log("The client IP:" + clientIp);
   const clientIP = req.body.clientIp;
   const nodeId = req.body.nodeId;
   console.log("The Other peer NodeID is: " + nodeId);
@@ -108,10 +109,6 @@ app.get('/hostRepo', (req, res) => {
     });
   });
 });
-
-
-
-
 
 app.get("/hostDisk", (req, res) => {
   const folderPath = path.join(__dirname, "../p2p/disk");

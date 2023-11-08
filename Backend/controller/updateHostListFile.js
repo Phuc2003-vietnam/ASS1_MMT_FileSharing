@@ -3,10 +3,12 @@ const path = require("path");
 const fs = require("fs");
 
 async function updateHostListFile(req, res) {
+  console.log("==================================================================");
   const hostname = req.body.hostname;
   console.log(hostname);
   var check = 0;
   const file = req.body.file;
+  console.log(file);
   const data = await readFull();
   console.log(data);
   for (var i = 0; i < data.client.length; i++) {
