@@ -40,9 +40,12 @@ const TerminalController = (props = {}) => {
           </TerminalOutput>,
           ...files.map((file, index) => (
             <TerminalOutput key={index}>
-              <p className="w-[400px] truncate flex justify-between">
-                <span className="text-blue-400">{file}</span>
-              </p>
+              <span className="w-[500px] flex justify-between">
+                <span className="w-[80%] truncate  ">
+                  {file?.name || "Null"}
+                </span>
+                <span className="text-blue-500"> {file?.size || "Null"} </span>
+              </span>
             </TerminalOutput>
           )),
           <TerminalOutput></TerminalOutput>,
@@ -76,12 +79,17 @@ const TerminalController = (props = {}) => {
           </TerminalOutput>,
           ...files.map((fileItem, index) => (
             <TerminalOutput key={index}>
-              <p className="w-[600px] truncate flex justify-between">
-                <span className="text-blue-400 w-[300px] truncate">
-                  {fileItem.file}
+              <span className="w-[700px] flex justify-between">
+                <span className="w-[500px] flex justify-between">
+                  <span className="w-[80%] truncate  ">
+                    {fileItem?.file.name || "Null"}
+                  </span>
+                  <span className="text-blue-500">
+                    {fileItem?.file.size || "Null"}
+                  </span>
                 </span>
                 <span> ({fileItem.localIp})</span>
-              </p>
+              </span>
             </TerminalOutput>
           )),
           <TerminalOutput></TerminalOutput>,
@@ -126,6 +134,7 @@ const TerminalController = (props = {}) => {
             <TerminalOutput>
               {"---------------------------------"}
             </TerminalOutput>,
+            <TerminalOutput></TerminalOutput>,
             <TerminalOutput>
               <span className="text-[yellow]">Upload file success</span>
             </TerminalOutput>,
@@ -139,6 +148,7 @@ const TerminalController = (props = {}) => {
             <TerminalOutput>
               {"---------------------------------"}
             </TerminalOutput>,
+            <TerminalOutput></TerminalOutput>,
             <TerminalOutput>
               <span className="text-[yellow]">
                 {"Error in Publish feature"}
@@ -156,11 +166,6 @@ const TerminalController = (props = {}) => {
 
         console.log("Delete data", data);
 
-        // const response = await axios.post(
-        //   "http://localhost:8080/fileInRepo",
-        //   data
-        // );
-
         const response = await RepositoryApi.deleteFile(data);
         if (response.status === 200) {
           console.log("File deleted successfully");
@@ -175,6 +180,7 @@ const TerminalController = (props = {}) => {
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
+          <TerminalOutput></TerminalOutput>,
           <TerminalOutput>
             <span className="text-[yellow]">Delete file success</span>
           </TerminalOutput>,
@@ -217,6 +223,7 @@ const TerminalController = (props = {}) => {
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
+          <TerminalOutput></TerminalOutput>,
           <TerminalOutput>
             <span className="text-[yellow]">
               {"FileName or IP address not found!"}
@@ -244,6 +251,7 @@ const TerminalController = (props = {}) => {
             <TerminalOutput>
               {"---------------------------------"}
             </TerminalOutput>,
+            <TerminalOutput></TerminalOutput>,
             <TerminalOutput>
               <span className="text-[yellow]">{"Fetch file success"} </span>
             </TerminalOutput>,
@@ -257,6 +265,7 @@ const TerminalController = (props = {}) => {
             <TerminalOutput>
               {"---------------------------------"}
             </TerminalOutput>,
+            <TerminalOutput></TerminalOutput>,
             <TerminalOutput>
               <span className="text-[yellow]">{"Error in Fetch feature"} </span>
             </TerminalOutput>,
@@ -363,13 +372,14 @@ const TerminalController = (props = {}) => {
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
+          <TerminalOutput></TerminalOutput>,
           <TerminalOutput>
             <span className="text-[yellow]">{"Hostname not found!"} </span>
           </TerminalOutput>,
           <TerminalOutput></TerminalOutput>,
         ]);
       }
-    } else if (terminalInput === "getHostname") {
+    } else if (inputTokens[0] === "getHostname") {
       try {
         const response = await ServerServiceApi.getHostname();
         console.log("Gethostname response", response);
@@ -402,7 +412,7 @@ const TerminalController = (props = {}) => {
           <TerminalOutput></TerminalOutput>,
         ]);
       }
-    } else if (terminalInput === "clear") {
+    } else if (inputTokens[0] === "clear") {
       setTerminalLineData([
         <TerminalOutput>
           {"Welcome to the File Sharing Application!"}

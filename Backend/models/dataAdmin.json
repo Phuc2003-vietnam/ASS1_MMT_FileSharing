@@ -1,1 +1,52 @@
-{"client":[{"hostname":"localhost","port":4001,"password":"123","isActive":true,"file":[{"name":"BigDaddy_Report_3.pdf","size":"3.39MB"}],"localIp":"172.16.1.117","nodeId":"995c-75c8-fea8-d77e-7a65-7420-7f0a-1c15"},{"hostname":"Don2512","password":"123","isActive":true,"port":3001,"localIp":"172.16.1.100","file":[{"name":".gitignore","size":"70.00B"},{"name":"BigDaddy_Report_3.pdf","size":"3.39MB"}],"nodeId":"1c40-0b32-f7ce-2023-dfb3-a8d0-8ffd-adb7"},{"hostname":"localhost1","password":"123","isActive":false,"port":3001,"file":["BigDaddy_Report_3.pdf"],"localIp":"10.230.7.183","nodeId":"This host log out from p2p"},{"hostname":"localhost2","password":"123","localIp":"1"},{"hostname":"localhost3","password":"123","localIp":"1"},{"hostname":"admin123","password":"admin123","localIp":"10.230.7.183","isActive":false,"nodeId":"This host log out from p2p","file":[]}]}
+{
+  "client": [
+    {
+      "hostname": "localhost",
+      "port": 4001,
+      "password": "123",
+      "isActive": true,
+      "file": ["BigDaddy_Report_3.pdf"],
+      "localIp": "10.230.7.183",
+      "nodeId": "e4e9-96aa-dd22-7165-7832-7ff2-e22d-3372"
+    },
+    {
+      "hostname": "Don2512",
+      "password": "123",
+      "isActive": true,
+      "port": 3001,
+      "localIp": "10.229.78.56",
+      "file": [
+        { "name": ".gitignore", "size": "73.00B" },
+        { "name": "30kB.docx", "size": "33.83KB" },
+        { "name": "5.pdf", "size": "1.05MB" },
+        { "name": "500kb.docx", "size": "491.50KB" },
+        { "name": "BigDaddy_Report_4.pdf", "size": "3.86MB" },
+        { "name": "hello.docx", "size": "11.21KB" },
+        { "name": "BigDaddy_Report_3.pdf", "size": "3.39MB" },
+        { "name": "HK231_CO3001_Plan (2).xlsx", "size": "11.27KB" },
+        { "name": "new.pdf", "size": "14.48MB" },
+        { "name": "video.mp4", "size": "641.68MB" }
+      ],
+      "nodeId": "628e-c5f2-ce4e-9d23-1d68-7d30-46b4-c583"
+    },
+    {
+      "hostname": "localhost1",
+      "password": "123",
+      "isActive": false,
+      "port": 3001,
+      "file": ["BigDaddy_Report_3.pdf"],
+      "localIp": "10.230.7.183",
+      "nodeId": "This host log out from p2p"
+    },
+    { "hostname": "localhost2", "password": "123", "localIp": "1" },
+    { "hostname": "localhost3", "password": "123", "localIp": "1" },
+    {
+      "hostname": "admin123",
+      "password": "admin123",
+      "localIp": "10.230.7.183",
+      "isActive": false,
+      "nodeId": "This host log out from p2p",
+      "file": []
+    }
+  ]
+}
