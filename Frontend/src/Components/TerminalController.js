@@ -198,13 +198,12 @@ const TerminalController = (props = {}) => {
       try {
         const response = await ServerServiceApi.getListFile();
         const files = response.data.currentFiles;
+        console.log(files);
         for (let i = 0; i < files.length; i++) {
           const fileItem = files[i];
-
-          localIP = fileItem.localIp;
-          nodeId = fileItem.nodeId;
-
-          if (fileItem.file === inputTokens[1]) {
+          if (fileItem.file.name === inputTokens[1]) {
+            localIP = fileItem.localIp;
+            nodeId = fileItem.nodeId;
             if (inputTokens[2] === null) {
               localIP = fileItem.localIp;
               nodeId = fileItem.nodeId;
