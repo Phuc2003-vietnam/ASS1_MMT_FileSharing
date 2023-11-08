@@ -42,7 +42,10 @@ const ModalConfirmUpload = ({
 
     console.log(fileInfo);
     // call api thong bao den server
-    await ServerServiceApi.uploadFileInfo(fileInfo);
+
+    setTimeout(async () => {
+      await ServerServiceApi.uploadFileInfo(fileInfo);
+    }, 500);
 
     setOpenModal(false);
     // reload lại danh sach trong repository

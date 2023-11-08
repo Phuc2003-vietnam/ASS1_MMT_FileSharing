@@ -33,6 +33,7 @@ const ModalConfirmDownLoad = ({
         file: newListFile.data.files,
       };
       // call api thong bao den server
+      console.log("vnaldvknasvd", fileInfo);
       await ServerServiceApi.uploadFileInfo(fileInfo);
     } catch (error) {
       console.error("Error fetching data from API:", error);
@@ -45,8 +46,11 @@ const ModalConfirmDownLoad = ({
   const handelConfirm = async () => {
     try {
       setLoad(true);
-      const response = await RepositoryApi.fetchFile(fetchParams);
-      console.log(response);
+
+      setTimeout(async () => {
+        const response = await RepositoryApi.fetchFile(fetchParams);
+        console.log(response);
+      }, 500);
 
       await updateHostRepoToServer();
 
