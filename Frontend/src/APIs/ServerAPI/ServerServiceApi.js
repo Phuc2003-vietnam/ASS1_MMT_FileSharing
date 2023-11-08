@@ -6,6 +6,11 @@ const ServerServiceApi = {
     return BaseServerApi.get(path);
   },
 
+  searchFile(data) {
+    const path = "/api/search";
+    return BaseServerApi.post(path, data);
+  },
+
   uploadFileInfo(FileInfo) {
     const path = "/api/list-file-of-a-host";
     // console.log(JSON.stringify(FileInfo));
