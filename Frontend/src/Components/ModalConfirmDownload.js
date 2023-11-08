@@ -33,7 +33,7 @@ const ModalConfirmDownLoad = ({
         file: newListFile.data.files,
       };
       // call api thong bao den server
-      console.log("vnaldvknasvd", fileInfo);
+      console.log("send data Notice to Server", fileInfo);
       await ServerServiceApi.uploadFileInfo(fileInfo);
     } catch (error) {
       console.error("Error fetching data from API:", error);

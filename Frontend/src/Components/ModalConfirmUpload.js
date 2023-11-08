@@ -22,7 +22,7 @@ const ModalConfirmUpload = ({
     const formData = new FormData();
     formData.append("file", file);
 
-    axios
+    await axios
       .post("http://localhost:8080/uploadRepo", formData)
       .then(() => {
         console.log("Upload Success");
@@ -41,7 +41,7 @@ const ModalConfirmUpload = ({
       file: newListFile.data.files,
     };
 
-    console.log(fileInfo);
+    console.log("send data Notice to Server", fileInfo);
     // call api thong bao den server
 
     await ServerServiceApi.uploadFileInfo(fileInfo);
