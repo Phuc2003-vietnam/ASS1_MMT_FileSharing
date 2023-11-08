@@ -44,11 +44,12 @@ const ModalConfirmDelete = ({
 
     console.log("delete Response", response);
 
-    await updateHostRepoToServer();
-
-    await handleReloadRepo();
-    setLoad(false);
-    setOpenModal(false);
+    setTimeout(async () => {
+      await updateHostRepoToServer();
+      await handleReloadRepo();
+      setLoad(false);
+      setOpenModal(false);
+    }, 500);
   };
 
   return (

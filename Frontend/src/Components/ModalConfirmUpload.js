@@ -41,18 +41,15 @@ const ModalConfirmUpload = ({
       file: newListFile.data.files,
     };
 
-    console.log("send data Notice to Server", fileInfo);
     // call api thong bao den server
 
-    const responseNotice = await ServerServiceApi.uploadFileInfo(fileInfo);
-
-    console.log("Update to Server", responseNotice);
-
-    setOpenModal(false);
-    // reload lại danh sach trong repository
-    await handleReloadRepo();
-    // reload lại danh sach trong comunity
-    await handleReloadSystem();
+    setTimeout(async () => {
+      console.log("send data Notice to Server", fileInfo);
+      const responseNotice = await ServerServiceApi.uploadFileInfo(fileInfo);
+      console.log("Update to Server", responseNotice);
+      setOpenModal(false);
+      await handleReloadRepo();
+    }, 500);
   };
 
   return (
