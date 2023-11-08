@@ -35,6 +35,7 @@ const ModalConfirmUpload = ({
 
     // lay danh sach file moi
     const newListFile = await RepositoryApi.getList();
+
     const fileInfo = {
       hostname: hostName,
       file: newListFile.data.files,
@@ -43,9 +44,7 @@ const ModalConfirmUpload = ({
     console.log(fileInfo);
     // call api thong bao den server
 
-    setTimeout(async () => {
-      await ServerServiceApi.uploadFileInfo(fileInfo);
-    }, 500);
+    await ServerServiceApi.uploadFileInfo(fileInfo);
 
     setOpenModal(false);
     // reload lại danh sach trong repository

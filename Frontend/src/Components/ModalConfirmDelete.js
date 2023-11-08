@@ -38,13 +38,10 @@ const ModalConfirmDelete = ({
 
   const handleConfirm = async () => {
     setLoad(true);
-    setTimeout(async () => {
-      const response = await axios.post(
-        "http://localhost:8080/fileInRepo",
-        data
-      );
-      console.log("delete Response", response);
-    }, 500);
+
+    const response = await axios.post("http://localhost:8080/fileInRepo", data);
+
+    console.log("delete Response", response);
 
     await updateHostRepoToServer();
 
