@@ -39,7 +39,7 @@ const ClientGui = () => {
   const fetchListFileOnServer = async () => {
     try {
       const response = await ServerServiceApi.getListFile();
-      // console.log("ALL FIlE ON SYSTEM", response);
+      // console.log("ALL FIlE ON SYSTEM", response.data.currentFiles);
       setFileOnSystem(response.data.currentFiles);
     } catch (error) {
       console.error("Error fetching data from API:", error);
@@ -79,14 +79,15 @@ const ClientGui = () => {
             <input
               type="text"
               placeholder="Search file"
-              className="w-[90%] h-full text-[24px] outline-none px-3"
+              className="w-[90%] h-full text-[20px] outline-none px-3"
             />
             <SearchIcon></SearchIcon>
           </div>
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto overflow-y-auto">
             {fileOnSystem.map((fileItem, index) => (
               <CommunityFileItem
-                fileName={fileItem.file}
+                fileName={fileItem?.file.name || "Null"}
+                fileSize={fileItem?.file.size || "Null"}
                 hostIp={fileItem.localIp}
                 nodeId={fileItem.nodeId}
                 key={index}
@@ -103,7 +104,7 @@ const ClientGui = () => {
             <input
               id="newFile"
               type="file"
-              className="rounded-md mx-2 font-semibold text-[blue]"
+              className="rounded-md mx-2 font-semibold text-[blue] text-[20px]"
               onChange={(event) => {
                 const selectedFile = event.target.files[0];
                 setFile(selectedFile);
@@ -121,9 +122,10 @@ const ClientGui = () => {
             </ModalConfirmUpload>
           </div>
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto  overflow-y-auto">
-            {fileOnRepo.map((fileName, index) => (
+            {fileOnRepo.map((fileItem, index) => (
               <RepoFileItem
-                fileName={fileName}
+                fileName={fileItem?.name || "Null"}
+                fileSize={fileItem?.size || "Null"}
                 key={index}
                 handleReloadRepo={fetchListFileOnRepository}
               ></RepoFileItem>
