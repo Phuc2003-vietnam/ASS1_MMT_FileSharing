@@ -49,11 +49,11 @@ const ModalConfirmDownLoad = ({
 
       const response = await RepositoryApi.fetchFile(fetchParams);
       console.log(response);
+
       setTimeout(async () => {
         await updateHostRepoToServer();
+        await handleReloadRepo();
       }, 500);
-
-      await handleReloadRepo();
     } catch (error) {
       console.error("Error fetching file", error);
     }

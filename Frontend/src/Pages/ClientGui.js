@@ -30,7 +30,7 @@ const ClientGui = () => {
     try {
       const response = await RepositoryApi.getList();
       setFileOnRepo(response.data.files); // Assuming response.data is an array of file names
-      // console.log("ALL FIlE ON REPOSITORY", response.data.files);
+      console.log("ALL FIlE ON REPOSITORY", response.data.files);
     } catch (error) {
       console.error("Error fetching data from API:", error);
     }
@@ -39,7 +39,7 @@ const ClientGui = () => {
   const fetchListFileOnServer = async () => {
     try {
       const response = await ServerServiceApi.getListFile();
-      // console.log("ALL FIlE ON SYSTEM", response.data.currentFiles);
+      console.log("ALL FIlE ON SYSTEM", response.data.currentFiles);
       setFileOnSystem(response.data.currentFiles);
     } catch (error) {
       console.error("Error fetching data from API:", error);
@@ -86,8 +86,8 @@ const ClientGui = () => {
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto overflow-y-auto">
             {fileOnSystem.map((fileItem, index) => (
               <CommunityFileItem
-                fileName={fileItem?.file.name || "Null"}
-                fileSize={fileItem?.file.size || "Null"}
+                fileName={fileItem?.file.name}
+                fileSize={fileItem?.file.size}
                 hostIp={fileItem.localIp}
                 nodeId={fileItem.nodeId}
                 key={index}
@@ -124,8 +124,8 @@ const ClientGui = () => {
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto  overflow-y-auto">
             {fileOnRepo.map((fileItem, index) => (
               <RepoFileItem
-                fileName={fileItem?.name || "Null"}
-                fileSize={fileItem?.size || "Null"}
+                fileName={fileItem?.name}
+                fileSize={fileItem?.size}
                 key={index}
                 handleReloadRepo={fetchListFileOnRepository}
               ></RepoFileItem>
