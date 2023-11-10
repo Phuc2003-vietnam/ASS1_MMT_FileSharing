@@ -1,20 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchIcon } from "../Icons/Icons";
 import ItemList from "../Components/ItemList";
 import Header from "../Components/Header";
-
-const hostnameList = ["MINHHIEU", "MINHMINH", "HACKER", "H6_P304", "HCMUT"];
-const fileOfHostname = ["giaitich.pdf", "hopdong.pdf", "report.docx"];
+import ServerServiceApi from "../APIs/ServerAPI/ServerServiceApi";
 
 const AdminGui = () => {
   const [pingHostname, setPingHostname] = useState("");
+  const [pingStatus, setPingStatus] = useState("");
+  const [files, setFile] = useState([]);
   const [discoverHostname, setDiscoverHostname] = useState("");
-  const handlePing = () => {
-    console.log(pingHostname);
+  const [hostnameList, setHostnameList] = useState([]);
+
+  const handlePing = async () => {
+    try {
+      const data = { hostname: pingHostname };
+
+      console.log("Ping data", data);
+
+      const response = await ServerServiceApi.ping(data);
+
+      if (response.status === 200) {
+        setPingStatus("ON");
+      }
+    } catch (error) {
+      setPingStatus("OFF");
+    }
   };
-  const handleDiscover = () => {
-    console.log(discoverHostname);
+
+  const handleDiscover = async () => {
+    const data = { hostname: discoverHostname };
+    console.log("Discover Data", data);
+    const response = await ServerServiceApi.discover(data);
+    console.log("Discover Response", response.data.currentFiles);
+    setFile(response.data.currentFiles);
   };
+
+  useEffect(() => {
+    const fetchHostname = async () => {
+      const response = await ServerServiceApi.getHostname();
+      console.log("Gethostname response", response);
+      setHostnameList(response.data.hostname);
+    };
+
+    fetchHostname();
+  }, []);
+
+  console.log(files);
 
   return (
     <div className="homeContainter w-[1200px] h-[900px] rounded-lg bg-[#5A6465] shadow-lg shadow-cyan-500/50">
@@ -34,7 +65,7 @@ const AdminGui = () => {
           </div>
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto overflow-y-auto">
             {hostnameList.map((hostName, index) => (
-              <ItemList infomation={hostName} key={index}></ItemList>
+              <ItemList fileName={hostName} key={index}></ItemList>
             ))}
           </div>
         </div>
@@ -42,8 +73,9 @@ const AdminGui = () => {
           <div className="w-[100%] h-[150px] bg-[#252A33] rounded-lg pt-2">
             <div className="text-[26px] text-[#66FCF1]  font-bold flex items-center justify-between px-[25px]">
               <span className=""> Ping hostname</span>
-              <span className="">
-                Status: <span className="text-[yellow] pl-3"> OFF </span>
+              <span className="w-[150px] flex">
+                Status:{" "}
+                <span className="text-[yellow] pl-3"> {pingStatus} </span>
               </span>
             </div>
             <div className="flex items-center mt-4 justify-between w-[90%] mx-auto text-[24px]">
@@ -85,8 +117,12 @@ const AdminGui = () => {
               Files Shared from [Host Name]
             </p>
             <div className="w-[90%] mx-auto h-[340px] bg-white rounded-lg mt-3 py-3 overflow-y-auto">
-              {fileOfHostname.map((fileName, index) => (
-                <ItemList infomation={fileName} key={index}></ItemList>
+              {files.map((fileItem, index) => (
+                <ItemList
+                  fileName={fileItem.name}
+                  fileSize={fileItem.size}
+                  key={index}
+                ></ItemList>
               ))}
             </div>
           </div>

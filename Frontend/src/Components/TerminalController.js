@@ -34,14 +34,14 @@ const TerminalController = (props = {}) => {
         const files = response.data.files;
         setTerminalLineData((prevData) => [
           ...prevData,
-          <TerminalOutput>{"$ myRepository"}</TerminalOutput>,
+          <TerminalOutput>{`$ ${terminalInput}`}</TerminalOutput>,
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
           ...files.map((file, index) => (
             <TerminalOutput key={index}>
               <span className="w-[500px] flex justify-between">
-                <span className="w-[80%] truncate  ">
+                <span className="w-[80%] truncate text-blue-500 ">
                   {file?.name || "Null"}
                 </span>
                 <span className="text-blue-500"> {file?.size || "Null"} </span>
@@ -81,7 +81,7 @@ const TerminalController = (props = {}) => {
             <TerminalOutput key={index}>
               <span className="w-[700px] flex justify-between">
                 <span className="w-[500px] flex justify-between">
-                  <span className="w-[80%] truncate  ">
+                  <span className="w-[80%] truncate  text-blue-500">
                     {fileItem?.file.name || "Null"}
                   </span>
                   <span className="text-blue-500">
@@ -193,12 +193,17 @@ const TerminalController = (props = {}) => {
       let localIP = -1;
       let nodeId = -1;
 
+      console.log(inputTokens);
+
       try {
         const response = await ServerServiceApi.getListFile();
         const files = response.data.currentFiles;
+        console.log(files);
         for (let i = 0; i < files.length; i++) {
           const fileItem = files[i];
-          if (fileItem.file === inputTokens[1]) {
+          if (fileItem.file.name === inputTokens[1]) {
+            localIP = fileItem.localIp;
+            nodeId = fileItem.nodeId;
             if (inputTokens[2] === null) {
               localIP = fileItem.localIp;
               nodeId = fileItem.nodeId;
@@ -239,12 +244,13 @@ const TerminalController = (props = {}) => {
           fileName: inputTokens[1],
         };
 
+        console.log("fetchParamsv form terminal", fetchParams);
+
         try {
           const response = await RepositoryApi.fetchFile(fetchParams);
-          console.log(response);
+          console.log("Reponse fetchFile ", response);
 
           await updateHostRepoToServer();
-
           setTerminalLineData((prevData) => [
             ...prevData,
             <TerminalOutput>{`$ fetch ${inputTokens[1]}`}</TerminalOutput>,
@@ -311,13 +317,14 @@ const TerminalController = (props = {}) => {
 
         const response = await ServerServiceApi.ping(data);
 
-        console.log("Ping Response", response);
+        console.log("Ping Response", response.status);
         setTerminalLineData((prevData) => [
           ...prevData,
           <TerminalOutput>{`$ ${terminalInput}`}</TerminalOutput>,
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
+          <TerminalOutput></TerminalOutput>,
           <TerminalOutput>
             <span className="text-[yellow]">{"Live"} </span>
           </TerminalOutput>,
@@ -332,6 +339,7 @@ const TerminalController = (props = {}) => {
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
+          <TerminalOutput></TerminalOutput>,
           <TerminalOutput>
             <span className="text-[yellow]">{"Not Live"} </span>
           </TerminalOutput>,
@@ -353,13 +361,14 @@ const TerminalController = (props = {}) => {
           <TerminalOutput>
             {"---------------------------------"}
           </TerminalOutput>,
-          ...files.map((fileItem, index) => (
+          ...files.map((file, index) => (
             <TerminalOutput key={index}>
-              <p className="w-[600px] truncate flex justify-between">
-                <span className="text-blue-400 w-[300px] truncate">
-                  {fileItem}
+              <span className="w-[500px] flex justify-between">
+                <span className="w-[80%] truncate text-blue-500">
+                  {file?.name || "Null"}
                 </span>
-              </p>
+                <span className="text-blue-500"> {file?.size || "Null"} </span>
+              </span>
             </TerminalOutput>
           )),
           <TerminalOutput></TerminalOutput>,
@@ -393,7 +402,7 @@ const TerminalController = (props = {}) => {
           ...hostnames.map((hostname, index) => (
             <TerminalOutput key={index}>
               <p className="w-[600px] truncate flex justify-between">
-                <span className="text-blue-400 w-[300px] truncate">
+                <span className="text-blue-400 w-[400px] truncate">
                   {hostname}
                 </span>
               </p>

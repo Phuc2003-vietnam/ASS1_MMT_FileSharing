@@ -11,6 +11,7 @@ const ClientGui = () => {
   const [fileOnSystem, setFileOnSystem] = useState([]);
   const [fileOnRepo, setFileOnRepo] = useState([]);
   const hostName = localStorage.getItem("hostname");
+  const [fileSearch, setFileSearch] = useState("");
 
   const updateHostRepoToServer = async () => {
     try {
@@ -46,6 +47,21 @@ const ClientGui = () => {
     }
   };
 
+  const handleSearchFile = async () => {
+    try {
+      if (fileSearch === "") {
+        fetchListFileOnServer();
+      } else {
+        const data = { searchString: fileSearch };
+        const response = await ServerServiceApi.searchFile(data);
+        console.log("SEARCH FILE ON SYSTEM", response.data.currentFiles);
+        setFileOnSystem(response.data.currentFiles);
+      }
+    } catch (error) {
+      console.error("Error fetching data from API:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,7 +72,7 @@ const ClientGui = () => {
 
       const intervalId = setInterval(() => {
         fetchListFileOnServer();
-      }, 100000);
+      }, 10000);
 
       fetchListFileOnServer();
       fetchListFileOnRepository();
@@ -80,8 +96,14 @@ const ClientGui = () => {
               type="text"
               placeholder="Search file"
               className="w-[90%] h-full text-[20px] outline-none px-3"
+              onInput={async (e) => {
+                setFileSearch(e.target.value);
+                handleSearchFile();
+              }}
             />
-            <SearchIcon></SearchIcon>
+            <div onClick={handleSearchFile}>
+              <SearchIcon></SearchIcon>
+            </div>
           </div>
           <div className="Search p-4 text-[25px] bg-white rounded-lg w-[90%] h-[78%] mt-5 mx-auto overflow-y-auto">
             {fileOnSystem.map((fileItem, index) => (

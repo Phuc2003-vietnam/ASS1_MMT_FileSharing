@@ -14,8 +14,8 @@ export const CommunityFileItem = ({
   return (
     <div className="w-[90%] p-2 pr-4 bg-[#D9D9D9] border-b-4 border-black rounded-md mx-auto text-[20px] my-2 font-semibold text flex justify-between items-center hover:bg-gray-400 transition-all ">
       <span className="w-[90%] flex justify-between">
-        <span className="w-80% truncate "> {fileName} </span>
-        <span className="text-blue-500"> {fileSize} </span>
+        <span className="w-80% truncate text-blue-500 "> {fileName} </span>
+        <span className=""> {fileSize} </span>
       </span>
       <ModalConfirmDownLoad
         message={`Confirm download this ${fileName}`}
@@ -34,8 +34,8 @@ export const RepoFileItem = ({ fileName, fileSize, handleReloadRepo }) => {
   return (
     <div className="w-[90%] p-2 pr-4 bg-[#D9D9D9] border-b-4 border-black rounded-md mx-auto text-[20px] my-2 font-semibold text flex justify-between items-center hover:bg-gray-400 transition-all">
       <span className="w-[90%] flex justify-between">
-        <span className="w-80% truncate "> {fileName} </span>
-        <span className="text-blue-500"> {fileSize} </span>
+        <span className="w-80% truncate text-blue-500 "> {fileName} </span>
+        <span className=""> {fileSize} </span>
       </span>
       <ModalConfirmDelete
         message={`Confirm delete this ${fileName}`}
