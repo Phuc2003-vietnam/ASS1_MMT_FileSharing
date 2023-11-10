@@ -20,8 +20,8 @@ node.listen(3000, 3001, () => {
   console.log("File server is running on port 3000 and file server is 3001");
 });
 app.post("/fetch", (req, res) => {
-  console.log("The client IP:" + clientIp);
   const clientIP = req.body.clientIp;
+  console.log("The client IP:" + clientIP);
   const nodeId = req.body.nodeId;
   console.log("The Other peer NodeID is: " + nodeId);
   const clientPort = req.body.clientPort;

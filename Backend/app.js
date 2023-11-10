@@ -13,7 +13,7 @@ const getCurrentFiles = require("./controller/getCurrentFiles");
 const getHostName = require("./controller/getHostName");
 const ping = require("./controller/ping");
 const logout = require("./controller/logout");
-
+const searchAllCurrentFiles = require("./controller/searchAllCurrentFiles");
 const updateHostListFile = require("./controller/updateHostListFile");
 
 const multer = require("multer");
@@ -70,6 +70,7 @@ app.put("/api/list-file-of-a-host", updateHostListFile);
 // get hostname
 app.get("/api/hostname", getHostName);
 app.post("/api/ping", ping);
+app.post("/api/search", searchAllCurrentFiles);
 
 const PORT = 5000;
 
